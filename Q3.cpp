@@ -1,20 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
-struct Node { int d; Node *next; Node(int x): d(x), next(NULL) {} };
 int main() {
-    Node *head = NULL;
-    int n, x;
+    int n;
     cin >> n;
+    queue<int> q;
     for (int i = 0; i < n; i++) {
-        cin >> x;
-        Node *p = new Node(x);
-        p->next = head;
-        head = p;
+        int x; cin >> x; q.push(x);
     }
-    Node *slow = head, *fast = head;
-    while (fast && fast->next) {
-        slow = slow->next;
-        fast = fast->next->next;
+    int half = n / 2;
+    queue<int> q1;
+    for (int i = 0; i < half; i++) { q1.push(q.front()); q.pop(); }
+    while (!q1.empty()) {
+        cout << q1.front() << " " << q.front() << " ";
+        q1.pop(); q.pop();
     }
-    cout << slow->d;
 }
